@@ -1,0 +1,64 @@
+//NAME              :   Isabel 
+//GROUP             :   DM
+//LAST MODIFIED     :   1 October 2017
+//PROBLEM ID        :   Polnomial Evaluation Algorithm Program
+//DESCRIPTION       :   Evaluates a polynomial given certain inputs
+//                      Uses the polynomial evaluation method
+//SOURCES/HELPERS   :   Mr. H, Dossey
+
+import java.util.*;
+import java.text.*;
+import java.lang.*;
+
+public class Horners
+{
+    public static void main (String [] args)
+    {
+        //Signture
+        System.out.println ("Isabel Holtan\nDM\nPolynomial Evaluation Algorithm\n");
+        
+        //Declares Variables
+        int degree, x;
+        String runAgain = "yes";
+        Scanner in = new Scanner (System.in);
+                
+        //Repeats for the number or runs 
+        while(runAgain == "yes")
+        {
+            //Prompts for input
+            System.out.print ("Degree of the Polynomial:  ");
+            degree = in.nextInt();
+            int [] coefficient = new int[degree+1];
+            System.out.print ("\nValue of x:  ");
+            x = in.nextInt();
+            System.out.print ("\nValue of constant term:  ");
+            coefficient[0] = in.nextInt();
+            
+            //Inputs coefficents into an array
+            for (int l=1; l <= degree; l++)
+            {
+                System.out.print ("\nCoefficient of the x^" + (l) + " term:  ");
+                coefficient[l] = in.nextInt();
+            }
+            
+            //Initiialization
+            int h = coefficient[degree], k = 1;
+            System.out.println();
+            
+            //Compute Next Expression
+            while(k <= degree)
+            {
+                System.out.println("H"  + k + " = " + h);
+                h = (x*h) + coefficient[degree-k];
+                k++;
+            }
+            
+            //Output P(x) = S
+            System.out.println("H" + k + " = " + h);
+            System.out.println("P(x) = " + h);
+            System.out.print("\nRun Polynomial Evaluation Program Again (yes/no) ?:  ");
+            runAgain = in.next();
+            System.out.println("\n");
+        }
+    }
+}
