@@ -1,0 +1,105 @@
+//NAME              :   Isabel 
+//GROUP             :   APCS
+//LAST MODIFIED     :   13 March 2017
+//PROBLEM ID        :   Bubble Sort
+//DESCRIPTION       :   Demonstrates an efficient bubble sort
+//SOURCES/HELPERS   :   Mr. H., Lewis and Loftus
+
+import java.util.*;
+import java.text.*;
+import java.lang.*;
+
+public class BubbleSort
+{
+    public static void main (String [] args)
+    {
+        //Signture
+        System.out.println ("Isabel Holtan\nAPSC\nBubble Sort\n");
+        
+        //Declares Variables
+        int numRuns;
+        Scanner in = new Scanner (System.in);
+        final int SIZE = 7;
+        
+        //Prompts user for the number of runs
+        System.out.print ("Input number of runs:  ");
+        numRuns = in.nextInt();
+        
+        //Repeats for the number or runs 
+        for (int k=0; k< numRuns; k++)
+        {
+            System.out.print("Input the numbers to be sorted:  ");
+            
+            //Inputs the number order
+            int[] numbers = new int [SIZE];
+            int swaps = 0;
+            int[] sorted = new int [SIZE];
+            for(int j=0; j< SIZE; j++)
+            {
+                numbers[j] = in.nextInt();
+                sorted[j] = numbers[j];
+            }
+             Arrays.sort(sorted);
+             
+            //Outputs the old number order
+            System.out.print("\nThe old number order was:  ");
+            for(int j=0; j< SIZE; j++)
+            {
+                System.out.print(numbers[j]+ " " );
+            }
+            
+            int j, temp, tally =0;
+            boolean flag = true; 
+            int repeat = numbers.length -1, compares =0, passes = 0;
+
+
+            for(int q=0; q<SIZE; q++)
+            { 
+               for( j=0;  j <SIZE-1;  j++ )
+               {
+                   compares++;
+                   tally =0;
+                   if (numbers[j] > numbers[j+1] )
+                   {
+                       swaps++;
+                       temp = numbers[j];                
+                       numbers[j] = numbers[j+1];
+                       numbers[j+1] = temp;
+                       flag = true;  
+                   } 
+
+                   //sorted
+                   for(int z=0; z<SIZE; z++)
+                   {
+                       if(sorted[z] == numbers[z])
+                       {
+                           tally++;
+                       }
+                   }
+                   if(tally == SIZE)
+                   {
+                       flag = false;
+                       break;
+                   }
+               }
+               if(flag = false)
+               {
+                   break;
+               }
+               passes++;
+               //repeat=-1;
+            }
+            
+        
+            
+            System.out.print("\n\nThe new number order is:  ");
+            for(int z=0; z< numbers.length; z++)
+            {
+                System.out.print(numbers[z] + " ");
+            }
+            System.out.println("\n\nThe number of swaps is " + swaps);
+            System.out.println("\nThe number of compares is " + compares);
+            System.out.println("\nThe number of  passes is " + passes);
+        }
+    }
+}
