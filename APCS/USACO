@@ -1,0 +1,95 @@
+/*
+ID: 
+LANG: JAVA
+PROG: beads
+*/
+
+//NAME              :   Isabel 
+//GROUP             :   APCS
+//LAST MODIFIED     :   11 November 2015
+//PROBLEM ID        :   Broken Necklace
+//DESCRIPTION       :   Finds the point in a necklace where it can be broken and
+//                  :   The largest amount of beads can be collected
+//SOURCES/HELPERS   :   Mr. H., Lewis and Loftus
+
+import java.io.*;
+import java.util.*;
+
+public class beads
+{
+    public static void main (String[] args) throws IOException
+    {
+        //Opening files for input and output
+        Scanner in = new Scanner (new File("beads.in"));
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("beads.out")));
+    
+        //Initialize variables
+        int length, max=0, counter=0;
+        String necklace;
+        boolean change;
+        char nextBead, currentBd;
+    
+        //Reads in input
+        length = in.nextInt();
+        necklace = in.next();
+    
+        //Repeats fot the length of the necklace
+        for (int j=0; j<length; j++)
+        {
+            //Initializes variables
+            counter=0;
+            change=false;
+            nextBead='w';
+        
+            //Repeats for the lenght of the necklace
+            for (int k=0; k<length; k++)
+            {
+                //Finds curernt spot for breaking the necklace
+                currentBd = necklace.charAt((j+k)%length);
+            
+                //When the bead at the point being broken is not white
+                if (currentBd != 'w')
+                {
+                    //Continue to the next bead when the next bead is white
+                    if (nextBead == 'w')
+                    {
+                        nextBead = currentBd;
+                    }
+                    else
+                    {
+                        //When the next bead is not white, check to see if it matches the next bead
+                        if (nextBead != currentBd)
+                        {
+                            //When it does not equal the chext bead, check to see if both sides of the necklace have been checked
+                            if (change == false)
+                            {
+                                change = true;
+                                nextBead = currentBd;
+                            }
+                            //When both sides have been checked continue to next break point
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+   
+                //Increment counter by 1
+                counter++;
+            }
+            
+            //Check to see if the current bead length is greater than the stored greatest length
+            if (counter > max)
+            {
+                max = counter;
+            }
+        }
+    
+        //Outputs the maximum bead length
+        out.println(max);
+    
+        //Ensures program ends properly
+        out.close();
+    }
+}   
