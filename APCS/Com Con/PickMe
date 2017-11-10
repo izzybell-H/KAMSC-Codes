@@ -1,0 +1,70 @@
+//NAME                  :       Isabel Holtan
+//GROUP                 :       APCS
+//LAST MODIFIED         :       16 March 2017
+//PROBLEM ID            :       March COMCON "Pick Me"
+//DESCRIPTION           :       Determines where to stand
+//                              in line to be picked last
+//SOURCES/HELPERS       :       Mr. Houtrouw, Lewis Book
+
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+public class pickMeTwo
+{
+    public static void main(String[] args) throws IOException
+    {
+        //Signature
+        System.out.println("Isabel Holtan\nAPCS\nMarch COMCON \"Pick Me Too (Two)\"\n\n");
+        Scanner scan = new Scanner(new File("PROGRAM4.DAT"));
+        
+        for(int l=0; l<5; l++)
+        {   
+            //Declare and initialize variables
+            int number = scan.nextInt();
+            int random = scan.nextInt();
+            int numCap = scan.nextInt();
+            int start = random-1;
+            final int ZERO = 0;
+            
+            //Create and input numbers into array list
+            ArrayList<String> loop = new ArrayList<String>();
+            ArrayList<String> capLoop = new ArrayList<String>();
+            for(int i=1; i<number+1; i++)
+            {
+                loop.add(""+i);
+            }
+            
+            //Determine the last spot left and remove from original group and add to captian group
+            while(loop.size()>1)
+            {
+                capLoop.add(loop.get(start));
+                loop.remove(start);
+                start += random-1;
+                if(start >= loop.size())
+                {
+                    start %= loop.size();
+                }
+            }
+            
+           
+            //Output result
+            System.out.print(loop.get(ZERO) + " ");
+            
+            //Output captian(s)
+            for (int j = capLoop.size()-1; j>capLoop.size()-numCap; j--)
+            {
+                System.out.print(capLoop.get(j) + " ");
+            }
+            System.out.print("\n\n\n");
+        }
+    }
+}
+
+
+
+
+
+
+
+
